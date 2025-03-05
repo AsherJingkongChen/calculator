@@ -1,0 +1,14 @@
+{
+  "name": "calculator",
+  "devDependencies": {
+    "html-minifier": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}

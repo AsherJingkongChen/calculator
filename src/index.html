@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <meta name="description" content="A simple calculator that solves math problems.">
+    <style>
+        * {
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        body {
+            align-items: center;
+            background-color: #eee;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Fira Code', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.6;
+            margin: 2em;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        h1 {
+            font-size: 200%;
+            font-weight: 900;
+        }
+
+        textarea {
+            animation: blink 1.1s ease-in-out infinite;
+            caret-color: #c93;
+            background-color: #eee;
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            resize: none;
+        }
+
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0.5em #cc9933aa;
+        }
+
+        #problem-display,
+        #solution-display {
+            border: none;
+            border-radius: 1em;
+            margin-inline: auto;
+            padding: 0.5em;
+            width: 16em;
+            text-align: center;
+            word-break: break-all;
+            transition: box-shadow 0.2s ease-in-out;
+        }
+
+        #problem-display {
+            background-color: #333;
+            color: #eee;
+        }
+
+
+        ::selection {
+            background-color: #dcb;
+            color: #c93;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                caret-color: #c93;
+            }
+
+            50% {
+                caret-color: transparent;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333;
+                color: #eee;
+            }
+
+            #problem-display {
+                background-color: #eee;
+                color: #333;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <h1>Calculator</h1>
+        <section id="problem">
+            <h2>Problem</h2>
+            <textarea rows="1" id="problem-display" placeholder="?" spellcheck="false"></textarea>
+        </section>
+        <section id="solution">
+            <h2>Solution</h2>
+            <p id="solution-display">!</p>
+        </section>
+    </div>
+    <script>
+        document.querySelectorAll("textarea").forEach((elem) => useAutoResize.call(elem));
+        document.getElementById("problem-display").addEventListener("input", solveProblem);
+
+        function autoResize() {
+            this.style.height = "auto";
+            this.style.height = this.scrollHeight + "px";
+        }
+        function solveProblem() {
+            const target = document.getElementById("solution-display");
+            target.innerText = calculator.solve(this.value) || "!";
+            autoResize.call(target);
+        }
+        function useAutoResize() {
+            this.style.height = this.scrollHeight + "px";
+            this.style.overflowY = "hidden";
+            this.addEventListener("input", autoResize);
+        }
+    </script>
+</body>
+
+</html>
+
+<!--
+    Copyright (C) 2025 Asher Chen
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
