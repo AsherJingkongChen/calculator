@@ -35,11 +35,13 @@ jobs:
             - run: npm install
             - run: npm run build
             - uses: cloudflare/wrangler-action@v3
+              if: github.ref == 'refs/heads/main'
               with:
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   command: pages deploy --commit-dirty true
             - uses: peaceiris/actions-gh-pages@v4
+              if: github.ref == 'refs/heads/main'
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: build
