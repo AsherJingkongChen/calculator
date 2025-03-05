@@ -9,6 +9,11 @@ execSync(`cargo build --release --target wasm32-unknown-unknown`, {
     stdio: "inherit",
 });
 
+fs.copyFile(
+    path.join(__dirname, "public", "favicon.ico"),
+    path.join(__dirname, "build", "favicon.ico")
+);
+
 let html = fs.readFileSync(path.join(__dirname, "src", "index.html"), "utf8");
 html = appendWasmToHtml(html, "calculator");
 html = appendLicenseToHtml(html, "LICENSE");
