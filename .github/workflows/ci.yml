@@ -1,0 +1,25 @@
+name: CI/CD
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dtolnay/rust-toolchain@stable
+              with:
+                  target: wasm32-unknown-unknown
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - run: npm install
+            - run: npm run build
+            - uses: cloudflare/wrangler-action@v3
+              with:
+                accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+                apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                command: pages deploy
