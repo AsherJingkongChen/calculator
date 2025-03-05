@@ -9,14 +9,14 @@ execSync(`cargo build --release --target wasm32-unknown-unknown`, {
     stdio: "inherit",
 });
 
-fs.copyFile(
+fs.cpSync(
     path.join(__dirname, "public", "favicon.ico"),
     path.join(__dirname, "build", "favicon.ico")
 );
 
 let html = fs.readFileSync(path.join(__dirname, "src", "index.html"), "utf8");
 html = appendWasmToHtml(html, "calculator");
-html = appendLicenseToHtml(html, "LICENSE");
+html = appendLicenseToHtml(html, path.join(__dirname, "LICENSE"));
 html = appendFontToHtml(html, {
     family: "Fira Code",
     style: "normal",
@@ -80,8 +80,8 @@ function appendFontToHtml(html, font) {
  * @returns {String}
  */
 function appendLicenseToHtml(html, file) {
-    const license = fs.readFileSync(path.join(__dirname, file), "utf8");
-    return html + `\n<!--\n${license}\n-->`;
+    const license = fs.readFileSync(file, "utf8");
+    return `${html}<!-- ${license} -->`;
 }
 
 /**
