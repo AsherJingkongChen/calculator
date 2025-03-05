@@ -10,6 +10,17 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - uses: actions/cache@v3
+              with:
+                path: |
+                    ~/.cargo/registry
+                    ~/.cargo/git
+                    target
+                key: rust-cache-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+            - uses: actions/cache@v3
+              with:
+                path: ~/.npm
+                key: npm-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
             - uses: dtolnay/rust-toolchain@stable
               with:
                   target: wasm32-unknown-unknown
@@ -18,7 +29,7 @@ jobs:
                   node-version: 20
             - uses: jetli/wasm-bindgen-action@v0.2.0
               with:
-                version: '0.2.100'
+                  version: "0.2.100"
             - run: npm install
             - run: npm run build
             - uses: cloudflare/wrangler-action@v3
