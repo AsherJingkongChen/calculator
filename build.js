@@ -31,8 +31,8 @@ html = minify(html, {
     sortAttributes: true,
     sortClassName: true,
 });
-fs.mkdirSync(path.join(__dirname, "dist"), { recursive: true });
-fs.writeFileSync(path.join(__dirname, "dist", "index.html"), html);
+fs.mkdirSync(path.join(__dirname, "build"), { recursive: true });
+fs.writeFileSync(path.join(__dirname, "build", "index.html"), html);
 
 /**
  * @param {String} html

@@ -1,3 +1,3 @@
-[![Calculator is a simple calculator that solves math problems.](README.png)](https://asherjingkongchen.github.io/calculator/)
+[![A simple calculator that solves math problems.](README.png)](https://calculator.asherchen.app/)
 
-[![](README.gif)](https://asherjingkongchen.github.io/calculator/)
+[![](README.gif)](https://calculator.asherchen.app/)
