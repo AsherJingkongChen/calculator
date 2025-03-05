@@ -39,10 +39,6 @@ jobs:
     deploy:
         runs-on: ubuntu-latest
         needs: build
-        permissions:
-            contents: read
-            id-token: write
-            pages: write
         steps:
             - uses: actions/checkout@v4
             - uses: actions/download-artifact@v4
@@ -54,6 +50,7 @@ jobs:
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   command: pages deploy --commit-dirty true
-            - uses: actions/deploy-pages@v4
+            - uses: peaceiris/actions-gh-pages@v4
               with:
-                  artifact_name: build
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: build
