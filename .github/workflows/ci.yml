@@ -57,3 +57,6 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: build
+            - uses: actions/deploy-pages@v4
+              with:
+                  artifact_name: build
