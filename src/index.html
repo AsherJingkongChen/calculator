@@ -28,7 +28,6 @@
         }
 
         textarea {
-            animation: blink 1.1s ease-in-out infinite;
             caret-color: #c93;
             background-color: #eee;
             font-family: inherit;
@@ -51,7 +50,7 @@
             width: 15em;
             text-align: center;
             word-break: break-all;
-            transition: box-shadow 0.2s ease-in-out;
+            transition: box-shadow 0.25s ease-in-out;
         }
 
         #problem-display {
@@ -63,18 +62,6 @@
         ::selection {
             background-color: #dcb;
             color: #c93;
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                caret-color: #c93;
-            }
-
-            50% {
-                caret-color: transparent;
-            }
         }
 
         @media (prefers-color-scheme: dark) {
