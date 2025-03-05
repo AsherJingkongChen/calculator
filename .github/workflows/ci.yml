@@ -41,6 +41,7 @@ jobs:
         needs: build
         permissions:
             contents: write
+            id-token: write
             pages: write
         steps:
             - uses: actions/checkout@v4
@@ -53,10 +54,6 @@ jobs:
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   command: pages deploy --commit-dirty true
-            - uses: peaceiris/actions-gh-pages@v4
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: build
             - uses: actions/deploy-pages@v4
               with:
                   artifact_name: build
